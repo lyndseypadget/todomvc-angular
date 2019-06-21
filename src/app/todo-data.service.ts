@@ -22,7 +22,7 @@ export class TodoDataService {
       todo.id = ++this.lastId;
     }
     this.todos.push(todo);
-		this.updateStore();
+    this.updateStore();
     return this;
   }
 
@@ -34,7 +34,7 @@ export class TodoDataService {
   deleteTodoById(id: number): TodoDataService {
     this.todos = this.todos
       .filter(todo => todo.id !== id);
-  	this.updateStore();
+    this.updateStore();
     return this;
   }
 
@@ -45,7 +45,7 @@ export class TodoDataService {
       return null;
     }
     Object.assign(todo, values);
-		this.updateStore();
+    this.updateStore();
     return todo;
   }
 
@@ -66,7 +66,7 @@ export class TodoDataService {
     let updatedTodo = this.updateTodoById(todo.id, {
       complete: !todo.complete
     });
-		this.updateStore();
+    this.updateStore();
     return updatedTodo;
   }
 
@@ -79,9 +79,9 @@ export class TodoDataService {
     this.updateStore();
   }
 
-	private updateStore() {
+  private updateStore() {
     this.todos.forEach(t => t.editing = false);
-		localStorage.setItem('@angular-todos', JSON.stringify(this.todos));
-	}
+    localStorage.setItem('@angular-todos', JSON.stringify(this.todos));
+  }
 
 }
