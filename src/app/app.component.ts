@@ -70,5 +70,6 @@ export class AppComponent {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.todoDataService.todos, event.previousIndex, event.currentIndex);
+    this.todoDataService.updateStore();
   }
 }

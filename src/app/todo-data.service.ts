@@ -79,7 +79,7 @@ export class TodoDataService {
     this.updateStore();
   }
 
-  private updateStore() {
+  updateStore() {
     this.todos.forEach(t => t.editing = false);
     localStorage.setItem('@angular-todos', JSON.stringify(this.todos));
   }
