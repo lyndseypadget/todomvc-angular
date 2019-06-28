@@ -1,4 +1,8 @@
 <div>
+  <header class="header">
+    <h1>todos</h1>
+    <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">
+  </header>
   <h2>Work</h2>
   <ul
   class="todo-list"
@@ -7,7 +11,7 @@
   [cdkDropListData]="work"
   [cdkDropListConnectedTo]="[personalList]"
   (cdkDropListDropped)="drop($event)">
-    <li cdkDrag *ngFor="let todo of todos" [class.completed]="todo.complete" [class.editing]="todo.editing" class="todo-list-item">
+    <li cdkDrag *ngFor="let todo of workTodos" [class.completed]="todo.complete" [class.editing]="todo.editing" class="todo-list-item">
       <div class="view">
         <input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">
         <label (dblclick)="editTodo(todo)">{{todo.title}}</label>
@@ -18,6 +22,6 @@
   </ul>
   <footer class="footer" *ngIf="todos.length > 0">
     <span class="todo-count"><strong>{{todos.length}}</strong> {{todos.length == 1 ? 'item' : 'items'}} left</span>
-    <button class="clear-completed" *ngIf="getWorkCompleteCount() > 0" (click)="removeWorkComplete()">Clear completed</button>
+    <button class="clear-completed" *ngIf="getCompleteCount() > 0" (click)="removeComplete()">Clear completed</button>
   </footer>
 </div>
