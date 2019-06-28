@@ -5,10 +5,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppComponent } from './app.component';
+import { WorkTodosComponent } from './work-todos/work-todos.component';
+import { PersonalTodosComponent } from './personal-todos/personal-todos.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WorkTodosComponent,
+    PersonalTodosComponent
   ],
   imports: [
     BrowserModule,
