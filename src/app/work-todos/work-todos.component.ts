@@ -68,9 +68,6 @@ export class WorkTodosComponent {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    // moveItemInArray(this.todoDataService.todos, event.previousIndex, event.currentIndex);
-    // this.todoDataService.updateStore();
-
     if (event.previousContainer === event.container) {
       moveItemInArray(this.todoDataService.todos, event.previousIndex, event.currentIndex);
     } else {
