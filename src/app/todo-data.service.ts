@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Optional, Injectable} from '@angular/core';
 import {Todo} from './todo';
 
 @Injectable()
@@ -11,9 +11,15 @@ export class TodoDataService {
   // Placeholder for todo's
   todos: Todo[] = [];
 
-  constructor() {
-    let persistedTodos = JSON.parse(localStorage.getItem('@angular-todos') || '[]');
-    this.todos = persistedTodos;
+  private todoType = null;
+
+  constructor(@Optional() todoType: string) {
+    this.todoType = todoType;
+    if(todoType == 'personal') {
+      this.todos = JSON.parse(localStorage.getItem('@angular-todos-personal') || '[]');
+    } else {
+      this.todos = JSON.parse(localStorage.getItem('@angular-todos') || '[]');
+    }
   }
 
   // Simulate POST /todos
@@ -81,7 +87,11 @@ export class TodoDataService {
 
   updateStore() {
     this.todos.forEach(t => t.editing = false);
-    localStorage.setItem('@angular-todos', JSON.stringify(this.todos));
+    if(this.todoType == 'personal') {
+      localStorage.setItem('@angular-todos-personal', JSON.stringify(this.todos));
+    } else {
+      localStorage.setItem('@angular-todos', JSON.stringify(this.todos));
+    }
   }
 
 }

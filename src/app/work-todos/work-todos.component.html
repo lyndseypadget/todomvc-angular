@@ -4,14 +4,8 @@
     <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">
   </header>
   <h2>Work</h2>
-  <ul
-  class="todo-list"
-  cdkDropList
-  #workList="cdkDropList"
-  [cdkDropListData]="work"
-  [cdkDropListConnectedTo]="[personalList]"
-  (cdkDropListDropped)="drop($event)">
-    <li cdkDrag *ngFor="let todo of workTodos" [class.completed]="todo.complete" [class.editing]="todo.editing" class="todo-list-item">
+  <ul class="todo-list" cdkDropList [cdkDropListData]="todos" (cdkDropListDropped)="drop($event)">
+    <li cdkDrag *ngFor="let todo of todos" [class.completed]="todo.complete" [class.editing]="todo.editing" class="todo-list-item">
       <div class="view">
         <input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">
         <label (dblclick)="editTodo(todo)">{{todo.title}}</label>

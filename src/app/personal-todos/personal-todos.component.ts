@@ -1,19 +1,20 @@
 import { Component } from '@angular/core';
 import {Todo} from '../todo';
 import {TodoDataService} from '../todo-data.service';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'personal-todos',
   templateUrl: './personal-todos.component.html',
   styleUrls: ['./personal-todos.component.css'],
-  providers: [TodoDataService]
+  providers: []
 })
 export class PersonalTodosComponent {
 
+  todoDataService: TodoDataService = new TodoDataService('personal');
   newTodo: Todo = new Todo();
 
-  constructor(private todoDataService: TodoDataService) {
+  constructor() {
   }
 
   addTodo() {
@@ -68,7 +69,16 @@ export class PersonalTodosComponent {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.todoDataService.todos, event.previousIndex, event.currentIndex);
-    this.todoDataService.updateStore();
+    // moveItemInArray(this.todoDataService.todos, event.previousIndex, event.currentIndex);
+    // this.todoDataService.updateStore();
+
+    if (event.previousContainer === event.container) {
+      moveItemInArray(this.todoDataService.todos, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+    }
   }
 }
